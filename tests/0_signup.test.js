@@ -36,7 +36,7 @@ test.describe("Signup Tests", () => {
         password: password,
         isValid: true,
       },
-      "./data/loginData.json"
+      "loginData.json"
     );
     // await page.pause();
   });

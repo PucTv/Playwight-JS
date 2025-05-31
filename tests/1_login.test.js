@@ -9,7 +9,7 @@ test.describe("Login Tests", () => {
 
   test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page);
-    testData = loginPage.readDataFromJSON("./data/loginData.json");
+    testData = loginPage.readDataFromJSON("loginData.json");
     await loginPage.gotoLoginPgae();
   });
 

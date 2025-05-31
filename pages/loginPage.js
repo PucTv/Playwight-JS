@@ -1,5 +1,5 @@
 import { expect } from "@playwright/test";
-import fs from "fs";
+import * as CF from "./common";
 
 class LoginPage {
   constructor(page) {
@@ -10,16 +10,16 @@ class LoginPage {
     this.txtCreateAccount = "//a[normalize-space()='Create an account']";
   }
 
-  async gotoLoginPgae() {
+  async gotoLoginPage() {
     await this.page.goto("http://localhost:3000/login");
   }
 
   async fillUsername(username) {
-    await this.page.locator(this.usernameField).fill(username);
+    await CF.fillInput(this.page, this.usernameField, username);
   }
 
   async fillPassword(password) {
-    await this.page.locator(this.passwordField).fill(password);
+    await CF.fillInput(this.page, this.passwordField, password);
   }
 
   async verifyErrorMessage(expectedMessage) {
@@ -32,16 +32,17 @@ class LoginPage {
   }
 
   async clickLoginButton() {
-    await this.page.locator(this.loginButton).click();
+    await CF.clickElement(this.page, this.loginButton);
   }
 
   async clickCreateAccount() {
-    await this.page.locator(this.txtCreateAccount).click();
+    await CF.clickElement(this.page, this.txtCreateAccount);
   }
 
   async loginPass() {
-    const element = await this.page.locator(this.loginButton);
-    await expect(element).toBeHidden({ timeout: 2000 });
+    await expect(this.page.locator(`xpath=${this.loginButton}`)).toBeHidden({
+      timeout: 2000,
+    });
   }
 
   async login(username, password) {
@@ -50,14 +51,9 @@ class LoginPage {
     await this.clickLoginButton();
   }
 
-  readDataFromJSON(fileName) {
-    try {
-      const rawData = fs.readFileSync(fileName);
-      return JSON.parse(rawData);
-    } catch (err) {
-      return [];
-    }
+  async readDataFromJSON(fileName) {
+    return await CF.readJsonFile(fileName);
   }
 }
 
-module.exports = LoginPage;
+export default LoginPage;
