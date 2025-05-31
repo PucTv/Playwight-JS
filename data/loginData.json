@@ -1,0 +1,22 @@
+[
+  {
+    "username": "nguyenthongoc",
+    "password": "123456",
+    "isValid": true
+  },
+  {
+    "username": "invalidUser@example.com",
+    "password": "wrongPassword",
+    "isValid": false
+  },
+  {
+    "username": "user1745903592299",
+    "password": "123456",
+    "isValid": true
+  },
+  {
+    "username": "user1745903606820",
+    "password": "123456",
+    "isValid": true
+  }
+]
